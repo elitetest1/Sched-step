@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Análisis Interactivo de CPU Governors: EnergyStep vs. Schedutil</title>
+    <title data-lang-key="pageTitle">Interactive CPU Governor Analysis: EnergyStep vs. Schedutil</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,30 +38,34 @@
 </head>
 <body class="bg-stone-100 text-stone-800">
 
+    <div id="lang-switcher" class="fixed top-4 right-4 z-50">
+        <button id="lang-toggle-btn" class="bg-white p-2 rounded-full shadow-lg text-2xl hover:bg-stone-200 transition">
+            <span id="lang-emoji">🇪🇸</span>
+        </button>
+    </div>
+
     <main class="container mx-auto px-4 py-8 md:py-12">
         <header class="text-center mb-12">
-            <h1 class="text-4xl md:text-5xl font-bold text-sky-800 mb-2">Análisis de CPU Governors</h1>
-            <p class="text-lg text-stone-600">Una Comparativa Interactiva: <span class="font-semibold text-sky-700">energy_step</span> vs. <span class="font-semibold text-sky-700">schedutil</span></p>
-            <h2 class="text-lg text-stone-600">por: <span class="font-semibold text-sky-700">ELITE</span> <span class="font-semibold text-sky-700">(and a little bit of Gemini)</span></h2>
+            <h1 class="text-4xl md:text-5xl font-bold text-sky-800 mb-2" data-lang-key="mainTitle"></h1>
+            <p class="text-lg text-stone-600" data-lang-key="mainSubtitle"></p>
+            <h2 class="text-lg text-stone-600" data-lang-key="author"></h2>
         </header>
 
         <section id="intro" class="max-w-4xl mx-auto mb-16">
-            <p class="text-center text-stone-700 leading-relaxed">
-                Los gobernadores de CPU son algoritmos esenciales en el kernel de Linux que ajustan dinámicamente la frecuencia del procesador para equilibrar rendimiento y eficiencia energética. Esta aplicación desglosa y compara dos enfoques muy diferentes: `energy_step`, una optimización específica de Samsung para sus procesadores Exynos, y `schedutil`, el moderno gobernador de la línea principal de Linux. Explore sus filosofías, mecanismos y compromisos a través de las siguientes secciones interactivas.
-            </p>
+            <p class="text-center text-stone-700 leading-relaxed" data-lang-key="introParagraph"></p>
         </section>
 
         <section id="comparison" class="mb-16">
             <div class="text-center mb-8">
-                <h2 class="text-3xl font-bold text-sky-800">Comparativa Lado a Lado</h2>
-                <p class="text-stone-600 mt-1">Seleccione un aspecto para comparar directamente las características de cada gobernador.</p>
+                <h2 class="text-3xl font-bold text-sky-800" data-lang-key="comparisonTitle"></h2>
+                <p class="text-stone-600 mt-1" data-lang-key="comparisonSubtitle"></p>
             </div>
             
             <div id="comparison-tabs" class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8">
-                <button data-tab="philosophy" class="tab-button active text-sm md:text-base font-semibold py-2 px-4 rounded-full border-2 border-stone-300 hover:bg-sky-600 hover:text-white hover:border-sky-600">Filosofía de Diseño</button>
-                <button data-tab="load_tracking" class="tab-button text-sm md:text-base font-semibold py-2 px-4 rounded-full border-2 border-stone-300 hover:bg-sky-600 hover:text-white hover:border-sky-600">Seguimiento de Carga</button>
-                <button data-tab="ecosystem" class="tab-button text-sm md:text-base font-semibold py-2 px-4 rounded-full border-2 border-stone-300 hover:bg-sky-600 hover:text-white hover:border-sky-600">Integración y Ecosistema</button>
-                <button data-tab="performance" class="tab-button text-sm md:text-base font-semibold py-2 px-4 rounded-full border-2 border-stone-300 hover:bg-sky-600 hover:text-white hover:border-sky-600">Rendimiento vs. Eficiencia</button>
+                <button data-tab="philosophy" class="tab-button active text-sm md:text-base font-semibold py-2 px-4 rounded-full border-2 border-stone-300 hover:bg-sky-600 hover:text-white hover:border-sky-600" data-lang-key="tabPhilosophy"></button>
+                <button data-tab="load_tracking" class="tab-button text-sm md:text-base font-semibold py-2 px-4 rounded-full border-2 border-stone-300 hover:bg-sky-600 hover:text-white hover:border-sky-600" data-lang-key="tabLoadTracking"></button>
+                <button data-tab="ecosystem" class="tab-button text-sm md:text-base font-semibold py-2 px-4 rounded-full border-2 border-stone-300 hover:bg-sky-600 hover:text-white hover:border-sky-600" data-lang-key="tabEcosystem"></button>
+                <button data-tab="performance" class="tab-button text-sm md:text-base font-semibold py-2 px-4 rounded-full border-2 border-stone-300 hover:bg-sky-600 hover:text-white hover:border-sky-600" data-lang-key="tabPerformance"></button>
             </div>
 
             <div class="grid md:grid-cols-2 gap-8">
@@ -78,27 +82,27 @@
         
         <section id="visual-lab" class="mb-16">
             <div class="text-center mb-8">
-                <h2 class="text-3xl font-bold text-sky-800">Laboratorio Visual</h2>
-                <p class="text-stone-600 mt-1">Visualice conceptos abstractos para entender mejor el comportamiento de cada gobernador.</p>
+                <h2 class="text-3xl font-bold text-sky-800" data-lang-key="visualLabTitle"></h2>
+                <p class="text-stone-600 mt-1" data-lang-key="visualLabSubtitle"></p>
             </div>
 
             <div class="grid md:grid-cols-2 gap-12">
                 <div class="bg-white p-6 rounded-xl shadow-lg">
-                    <h3 class="text-xl font-bold text-center mb-2">Modelo de Comportamiento de Frecuencia</h3>
-                    <p class="text-center text-sm text-stone-600 mb-4">Simule la respuesta de la frecuencia ante diferentes tipos de carga. Observe cómo `energy_step` prefiere mantenerse alto, mientras `schedutil` es más dinámico.</p>
+                    <h3 class="text-xl font-bold text-center mb-2" data-lang-key="behaviorChartTitle"></h3>
+                    <p class="text-center text-sm text-stone-600 mb-4" data-lang-key="behaviorChartDesc"></p>
                     <div class="chart-container h-80 md:h-96">
                         <canvas id="behaviorChart"></canvas>
                     </div>
                     <div class="flex justify-center gap-2 mt-4">
-                        <button onclick="handleBehaviorChartClick('idle')" class="bg-sky-600 text-white text-sm py-1 px-3 rounded-md hover:bg-sky-700">Carga Ligera</button>
-                        <button onclick="handleBehaviorChartClick('burst')" class="bg-sky-600 text-white text-sm py-1 px-3 rounded-md hover:bg-sky-700">Carga en Ráfaga</button>
-                        <button onclick="handleBehaviorChartClick('sustained')" class="bg-sky-600 text-white text-sm py-1 px-3 rounded-md hover:bg-sky-700">Carga Sostenida</button>
+                        <button onclick="handleBehaviorChartClick('idle')" class="bg-sky-600 text-white text-sm py-1 px-3 rounded-md hover:bg-sky-700" data-lang-key="btnLightLoad"></button>
+                        <button onclick="handleBehaviorChartClick('burst')" class="bg-sky-600 text-white text-sm py-1 px-3 rounded-md hover:bg-sky-700" data-lang-key="btnBurstLoad"></button>
+                        <button onclick="handleBehaviorChartClick('sustained')" class="bg-sky-600 text-white text-sm py-1 px-3 rounded-md hover:bg-sky-700" data-lang-key="btnSustainedLoad"></button>
                     </div>
                 </div>
 
                 <div class="bg-white p-6 rounded-xl shadow-lg">
-                    <h3 class="text-xl font-bold text-center mb-2">Perfil de Características</h3>
-                     <p class="text-center text-sm text-stone-600 mb-4">Un resumen visual de las fortalezas y debilidades relativas de cada gobernador, basado en el análisis del informe.</p>
+                    <h3 class="text-xl font-bold text-center mb-2" data-lang-key="radarChartTitle"></h3>
+                     <p class="text-center text-sm text-stone-600 mb-4" data-lang-key="radarChartDesc"></p>
                     <div class="chart-container h-80 md:h-96">
                         <canvas id="radarChart"></canvas>
                     </div>
@@ -108,46 +112,46 @@
 
         <section id="context" class="mb-16">
             <div class="text-center mb-8">
-                <h2 class="text-3xl font-bold text-sky-800">Contexto del Hardware: Exynos 2100</h2>
-                <p class="text-stone-600 mt-1">El comportamiento de `energy_step` está intrínsecamente ligado a la arquitectura del Exynos 2100 y su marco de gestión de energía AMIGO.</p>
+                <h2 class="text-3xl font-bold text-sky-800" data-lang-key="contextTitle"></h2>
+                <p class="text-stone-600 mt-1" data-lang-key="contextSubtitle"></p>
             </div>
             <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-8 items-start">
                 <div class="bg-white p-6 rounded-xl shadow-lg">
-                    <h3 class="text-xl font-bold text-center mb-4">Arquitectura de CPU Tri-Clúster</h3>
+                    <h3 class="text-xl font-bold text-center mb-4" data-lang-key="triClusterTitle"></h3>
                     <div class="space-y-4">
                         <div class="flex items-center bg-stone-50 p-3 rounded-lg">
                             <div class="text-3xl mr-4">⚡️</div>
                             <div>
                                 <h4 class="font-bold">1x Cortex-X1 @ 2.9 GHz</h4>
-                                <p class="text-sm text-stone-600">Núcleo de máximo rendimiento para tareas intensivas.</p>
+                                <p class="text-sm text-stone-600" data-lang-key="coreX1Desc"></p>
                             </div>
                         </div>
                         <div class="flex items-center bg-stone-50 p-3 rounded-lg">
                             <div class="text-3xl mr-4">⚙️</div>
                             <div>
                                 <h4 class="font-bold">3x Cortex-A78 @ 2.8 GHz</h4>
-                                <p class="text-sm text-stone-600">Núcleos de rendimiento equilibrado para uso general.</p>
+                                <p class="text-sm text-stone-600" data-lang-key="coreA78Desc"></p>
                             </div>
                         </div>
                         <div class="flex items-center bg-stone-50 p-3 rounded-lg">
                             <div class="text-3xl mr-4">🍃</div>
                             <div>
                                 <h4 class="font-bold">4x Cortex-A55 @ 2.2 GHz</h4>
-                                <p class="text-sm text-stone-600">Núcleos de alta eficiencia para tareas en segundo plano.</p>
+                                <p class="text-sm text-stone-600" data-lang-key="coreA55Desc"></p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="bg-white p-6 rounded-xl shadow-lg">
-                    <h3 class="text-xl font-bold text-center mb-4">El Rol de AMIGO</h3>
-                    <p class="text-sm text-stone-600 mb-4 text-center">AMIGO (Advanced Multi-IP Governor) es una capa de gestión propietaria de Samsung que orquesta múltiples componentes del SoC, incluyendo la CPU. `energy_step` opera bajo las directivas de este sistema más amplio.</p>
+                    <h3 class="text-xl font-bold text-center mb-4" data-lang-key="amigoRoleTitle"></h3>
+                    <p class="text-sm text-stone-600 mb-4 text-center" data-lang-key="amigoRoleDesc"></p>
                     <div class="flex flex-col items-center space-y-2">
                         <div class="bg-sky-700 text-white font-bold py-2 px-4 rounded-lg">AMIGO</div>
                         <div class="text-2xl">👇</div>
                         <div class="flex gap-2">
                             <div class="bg-stone-200 py-2 px-3 rounded-md text-sm">CPU (`energy_step`)</div>
-                            <div class="bg-stone-200 py-2 px-3 rounded-md text-sm">GPU</div>
-                            <div class="bg-stone-200 py-2 px-3 rounded-md text-sm">Memoria</div>
+                            <div class="bg-stone-200 py-2 px-3 rounded-md text-sm" data-lang-key="gpu"></div>
+                            <div class="bg-stone-200 py-2 px-3 rounded-md text-sm" data-lang-key="memory"></div>
                         </div>
                     </div>
                 </div>
@@ -156,111 +160,228 @@
 
         <section id="conclusion" class="max-w-4xl mx-auto">
              <div class="text-center mb-8">
-                <h2 class="text-3xl font-bold text-sky-800">Conclusiones Clave</h2>
+                <h2 class="text-3xl font-bold text-sky-800" data-lang-key="conclusionTitle"></h2>
             </div>
             <div class="bg-white p-8 rounded-xl shadow-lg space-y-4 text-stone-700">
-                <p><strong class="text-sky-800">Enfoques Divergentes:</strong> `energy_step` representa una optimización vertical y específica del hardware, ajustada para el ecosistema Exynos. `schedutil` encarna una solución horizontal, genérica y robusta, integrada profundamente en el kernel de Linux.</p>
-                <p><strong class="text-sky-800">Compensaciones (Trade-offs):</strong> La fortaleza de `energy_step` es su potencial para un rendimiento sostenido y predecible en cargas de trabajo conocidas (como juegos), pero puede sacrificar la eficiencia en usos más variados. `schedutil` brilla por su equilibrio y adaptabilidad, aunque su rendimiento en kernels más antiguos (como el 5.4) podría no estar tan afinado como en versiones más recientes.</p>
-                <p><strong class="text-sky-800">El Futuro es la Conciencia del Planificador:</strong> La tendencia, liderada por `schedutil`, es hacia gobernadores que utilizan la información detallada del planificador del kernel (scheduler) para tomar decisiones más inteligentes y en tiempo real, superando a los métodos basados en muestreo periódico.</p>
+                <p data-lang-key="conclusion1"></p>
+                <p data-lang-key="conclusion2"></p>
+                <p data-lang-key="conclusion3"></p>
             </div>
         </section>
 
     </main>
 
     <footer class="text-center py-6 text-sm text-stone-500">
-        <p>Aplicación generada para el análisis interactivo de conceptos del kernel de Linux.</p>
+        <p data-lang-key="footerText"></p>
     </footer>
 
     <script>
-        const comparisonContent = {
-            philosophy: {
-                energy_step: `
-                    <p>Es una optimización específica de Samsung, probablemente una variante de gobernadores como 'ondemand' o 'interactive'.</p>
-                    <p><strong>Objetivo:</strong> Reducir la sobrecarga y las oscilaciones de frecuencia manteniendo la CPU a máxima velocidad por más tiempo bajo cargas sostenidas. Prioriza un rendimiento alto y estable.</p>
-                `,
-                schedutil: `
-                    <p>Es un gobernador moderno de la línea principal de Linux, diseñado para ser genérico y adaptable a diverso hardware.</p>
-                    <p><strong>Objetivo:</strong> Lograr un equilibrio óptimo entre rendimiento y eficiencia energética mediante una integración profunda con el planificador (scheduler) del kernel para tomar decisiones basadas en la demanda real.</p>
-                `
+        // --- TRANSLATIONS OBJECT ---
+        const translations = {
+            en: {
+                pageTitle: "Interactive CPU Governor Analysis: EnergyStep vs. Schedutil",
+                mainTitle: "CPU Governor Analysis",
+                mainSubtitle: 'An Interactive Comparison: <span class="font-semibold text-sky-700">energy_step</span> vs. <span class="font-semibold text-sky-700">schedutil</span>',
+                author: 'by: <span class="font-semibold text-sky-700">ELITE</span> <span class="font-semibold text-sky-700">(and a little bit of Gemini)</span>',
+                introParagraph: "CPU governors are essential Linux kernel algorithms that dynamically adjust processor frequency to balance performance and energy efficiency. This application breaks down and compares two very different approaches: `energy_step`, a specific optimization by Samsung for its Exynos processors, and `schedutil`, the modern mainline Linux governor. Explore their philosophies, mechanisms, and trade-offs through the following interactive sections.",
+                comparisonTitle: "Side-by-Side Comparison",
+                comparisonSubtitle: "Select an aspect to directly compare the features of each governor.",
+                tabPhilosophy: "Design Philosophy",
+                tabLoadTracking: "Load Tracking",
+                tabEcosystem: "Integration & Ecosystem",
+                tabPerformance: "Performance vs. Efficiency",
+                visualLabTitle: "Visual Lab",
+                visualLabSubtitle: "Visualize abstract concepts to better understand each governor's behavior.",
+                behaviorChartTitle: "Frequency Behavior Model",
+                behaviorChartDesc: "Simulate the frequency response to different types of load. Notice how `energy_step` prefers to stay high, while `schedutil` is more dynamic.",
+                btnLightLoad: "Light Load",
+                btnBurstLoad: "Burst Load",
+                btnSustainedLoad: "Sustained Load",
+                radarChartTitle: "Feature Profile",
+                radarChartDesc: "A visual summary of the relative strengths and weaknesses of each governor, based on the report's analysis.",
+                contextTitle: "Hardware Context: Exynos 2100",
+                contextSubtitle: "The behavior of `energy_step` is intrinsically linked to the Exynos 2100 architecture and its AMIGO power management framework.",
+                triClusterTitle: "Tri-Cluster CPU Architecture",
+                coreX1Desc: "Maximum performance core for intensive tasks.",
+                coreA78Desc: "Balanced performance cores for general use.",
+                coreA55Desc: "High-efficiency cores for background tasks.",
+                amigoRoleTitle: "The Role of AMIGO",
+                amigoRoleDesc: "AMIGO (Advanced Multi-IP Governor) is a proprietary Samsung management layer that orchestrates multiple SoC components, including the CPU. `energy_step` operates under the directives of this broader system.",
+                gpu: "GPU",
+                memory: "Memory",
+                conclusionTitle: "Key Takeaways",
+                conclusion1: '<strong class="text-sky-800">Divergent Approaches:</strong> `energy_step` represents a vertical, hardware-specific optimization, fine-tuned for the Exynos ecosystem. `schedutil` embodies a horizontal, generic, and robust solution, deeply integrated into the Linux kernel.',
+                conclusion2: '<strong class="text-sky-800">Trade-offs:</strong> The strength of `energy_step` is its potential for sustained and predictable performance on known workloads (like gaming), but it may sacrifice efficiency in more varied uses. `schedutil` shines for its balance and adaptability, although its performance on older kernels (like 5.4) might not be as tuned as in more recent versions.',
+                conclusion3: '<strong class="text-sky-800">The Future is Scheduler-Awareness:</strong> The trend, led by `schedutil`, is towards governors that use detailed information from the kernel scheduler to make smarter, real-time decisions, surpassing methods based on periodic sampling.',
+                footerText: "Application generated for interactive analysis of Linux kernel concepts.",
             },
-            load_tracking: {
-                energy_step: `
-                    <p>Probablemente utiliza un <strong>muestreo periódico</strong> de la utilización de la CPU, similar a 'ondemand'.</p>
-                    <p>Su parámetro clave 'energy_step' o 'sampling_down_factor' modifica el intervalo de reevaluación cuando la CPU ya está a alta velocidad, retrasando la decisión de bajar la frecuencia.</p>
-                `,
-                schedutil: `
-                    <p>Utiliza <strong>Per-Entity Load Tracking (PELT)</strong>, un mecanismo avanzado del planificador.</p>
-                    <p>Rastrea la carga de cada tarea de forma continua, proporcionando una métrica de utilización precisa e <strong>invariante a la frecuencia</strong>, lo que permite decisiones más inteligentes y rápidas.</p>
-                `
-            },
-            ecosystem: {
-                energy_step: `
-                    <p>Opera dentro de un ecosistema propietario y cerrado de Samsung. Su comportamiento está fuertemente influenciado y orquestado por una capa superior llamada <strong>AMIGO (Advanced Multi-IP Governor)</strong>.</p>
-                    <p>AMIGO coordina CPU, GPU y memoria, por lo que \`energy_step\` no actúa de forma aislada.</p>
-                `,
-                schedutil: `
-                    <p>Está profundamente integrado con el <strong>planificador del kernel de Linux</strong>, una pieza central y genérica del sistema operativo.</p>
-                    <p>Se beneficia del desarrollo abierto y las mejoras continuas de la comunidad de Linux. Se convirtió en el predeterminado para ARM en el kernel 5.9, lo que indica su madurez y robustez.</p>
-                `
-            },
-            performance: {
-                energy_step: `
-                    <p><strong>Fortaleza:</strong> Potencialmente mejor rendimiento en tareas largas y sostenidas (ej. juegos) al evitar caídas de frecuencia.</p>
-                    <p><strong>Debilidad:</strong> Puede consumir más energía en cargas de trabajo mixtas o intermitentes. Informes de usuarios sugieren que otros gobernadores pueden ser más eficientes en batería.</p>
-                `,
-                schedutil: `
-                    <p><strong>Fortaleza:</strong> Excelente equilibrio. Ofrece un rendimiento cercano al gobernador 'performance' bajo carga, pero es mucho más eficiente en reposo o con cargas ligeras.</p>
-                    <p><strong>Debilidad:</strong> En el kernel 5.4, su optimización para ARM aún estaba en desarrollo, alcanzando su máximo potencial en versiones posteriores.</p>
-                `
+            es: {
+                pageTitle: "Análisis Interactivo de CPU Governors: EnergyStep vs. Schedutil",
+                mainTitle: "Análisis de CPU Governors",
+                mainSubtitle: 'Una Comparativa Interactiva: <span class="font-semibold text-sky-700">energy_step</span> vs. <span class="font-semibold text-sky-700">schedutil</span>',
+                author: 'por: <span class="font-semibold text-sky-700">ELITE</span> <span class="font-semibold text-sky-700">(y un poquito de Gemini)</span>',
+                introParagraph: "Los gobernadores de CPU son algoritmos esenciales en el kernel de Linux que ajustan dinámicamente la frecuencia del procesador para equilibrar rendimiento y eficiencia energética. Esta aplicación desglosa y compara dos enfoques muy diferentes: `energy_step`, una optimización específica de Samsung para sus procesadores Exynos, y `schedutil`, el moderno gobernador de la línea principal de Linux. Explore sus filosofías, mecanismos y compromisos a través de las siguientes secciones interactivas.",
+                comparisonTitle: "Comparativa Lado a Lado",
+                comparisonSubtitle: "Seleccione un aspecto para comparar directamente las características de cada gobernador.",
+                tabPhilosophy: "Filosofía de Diseño",
+                tabLoadTracking: "Seguimiento de Carga",
+                tabEcosystem: "Integración y Ecosistema",
+                tabPerformance: "Rendimiento vs. Eficiencia",
+                visualLabTitle: "Laboratorio Visual",
+                visualLabSubtitle: "Visualice conceptos abstractos para entender mejor el comportamiento de cada gobernador.",
+                behaviorChartTitle: "Modelo de Comportamiento de Frecuencia",
+                behaviorChartDesc: "Simule la respuesta de la frecuencia ante diferentes tipos de carga. Observe cómo `energy_step` prefiere mantenerse alto, mientras `schedutil` es más dinámico.",
+                btnLightLoad: "Carga Ligera",
+                btnBurstLoad: "Carga en Ráfaga",
+                btnSustainedLoad: "Carga Sostenida",
+                radarChartTitle: "Perfil de Características",
+                radarChartDesc: "Un resumen visual de las fortalezas y debilidades relativas de cada gobernador, basado en el análisis del informe.",
+                contextTitle: "Contexto del Hardware: Exynos 2100",
+                contextSubtitle: "El comportamiento de `energy_step` está intrínsecamente ligado a la arquitectura del Exynos 2100 y su marco de gestión de energía AMIGO.",
+                triClusterTitle: "Arquitectura de CPU Tri-Clúster",
+                coreX1Desc: "Núcleo de máximo rendimiento para tareas intensivas.",
+                coreA78Desc: "Núcleos de rendimiento equilibrado para uso general.",
+                coreA55Desc: "Núcleos de alta eficiencia para tareas en segundo plano.",
+                amigoRoleTitle: "El Rol de AMIGO",
+                amigoRoleDesc: "AMIGO (Advanced Multi-IP Governor) es una capa de gestión propietaria de Samsung que orquesta múltiples componentes del SoC, incluyendo la CPU. `energy_step` opera bajo las directivas de este sistema más amplio.",
+                gpu: "GPU",
+                memory: "Memoria",
+                conclusionTitle: "Conclusiones Clave",
+                conclusion1: '<strong class="text-sky-800">Enfoques Divergentes:</strong> `energy_step` representa una optimización vertical y específica del hardware, ajustada para el ecosistema Exynos. `schedutil` encarna una solución horizontal, genérica y robusta, integrada profundamente en el kernel de Linux.',
+                conclusion2: '<strong class="text-sky-800">Compensaciones (Trade-offs):</strong> La fortaleza de `energy_step` es su potencial para un rendimiento sostenido y predecible en cargas de trabajo conocidas (como juegos), pero puede sacrificar la eficiencia en usos más variados. `schedutil` brilla por su equilibrio y adaptabilidad, aunque su rendimiento en kernels más antiguos (como el 5.4) podría no estar tan afinado como en versiones más recientes.',
+                conclusion3: '<strong class="text-sky-800">El Futuro es la Conciencia del Planificador:</strong> La tendencia, liderada por `schedutil`, es hacia gobernadores que utilizan la información detallada del planificador del kernel (scheduler) para tomar decisiones más inteligentes y en tiempo real, superando a los métodos basados en muestreo periódico.',
+                footerText: "Aplicación generada para el análisis interactivo de conceptos del kernel de Linux.",
             }
         };
 
+        const comparisonContentByLang = {
+            en: {
+                philosophy: {
+                    energy_step: `<p>A specific Samsung optimization, likely a variant of governors like 'ondemand' or 'interactive'.</p><p><strong>Goal:</strong> To reduce overhead and frequency oscillations by keeping the CPU at maximum speed for longer under sustained loads. It prioritizes high and stable performance.</p>`,
+                    schedutil: `<p>A modern mainline Linux governor, designed to be generic and adaptable to diverse hardware.</p><p><strong>Goal:</strong> To achieve an optimal balance between performance and energy efficiency through deep integration with the kernel scheduler to make decisions based on real demand.</p>`
+                },
+                load_tracking: {
+                    energy_step: `<p>Likely uses <strong>periodic sampling</strong> of CPU utilization, similar to 'ondemand'.</p><p>Its key parameter 'energy_step' or 'sampling_down_factor' modifies the re-evaluation interval when the CPU is already at high speed, delaying the decision to lower the frequency.</p>`,
+                    schedutil: `<p>Uses <strong>Per-Entity Load Tracking (PELT)</strong>, an advanced scheduler mechanism.</p><p>It continuously tracks the load of each task, providing a precise and <strong>frequency-invariant</strong> utilization metric, which allows for smarter and faster decisions.</p>`
+                },
+                ecosystem: {
+                    energy_step: `<p>Operates within a proprietary and closed Samsung ecosystem. Its behavior is strongly influenced and orchestrated by a higher layer called <strong>AMIGO (Advanced Multi-IP Governor)</strong>.</p><p>AMIGO coordinates CPU, GPU, and memory, so \`energy_step\` does not act in isolation.</p>`,
+                    schedutil: `<p>It is deeply integrated with the <strong>Linux kernel scheduler</strong>, a central and generic part of the operating system.</p><p>It benefits from the open development and continuous improvements of the Linux community. It became the default for ARM in kernel 5.9, indicating its maturity and robustness.</p>`
+                },
+                performance: {
+                    energy_step: `<p><strong>Strength:</strong> Potentially better performance in long, sustained tasks (e.g., gaming) by avoiding frequency drops.</p><p><strong>Weakness:</strong> May consume more power in mixed or intermittent workloads. User reports suggest other governors can be more battery-efficient.</p>`,
+                    schedutil: `<p><strong>Strength:</strong> Excellent balance. Offers performance close to the 'performance' governor under load, but is much more efficient at idle or with light loads.</p><p><strong>Weakness:</strong> In kernel 5.4, its optimization for ARM was still under development, reaching its full potential in later versions.</p>`
+                }
+            },
+            es: {
+                philosophy: {
+                    energy_step: `<p>Es una optimización específica de Samsung, probablemente una variante de gobernadores como 'ondemand' o 'interactive'.</p><p><strong>Objetivo:</strong> Reducir la sobrecarga y las oscilaciones de frecuencia manteniendo la CPU a máxima velocidad por más tiempo bajo cargas sostenidas. Prioriza un rendimiento alto y estable.</p>`,
+                    schedutil: `<p>Es un gobernador moderno de la línea principal de Linux, diseñado para ser genérico y adaptable a diverso hardware.</p><p><strong>Objetivo:</strong> Lograr un equilibrio óptimo entre rendimiento y eficiencia energética mediante una integración profunda con el planificador (scheduler) del kernel para tomar decisiones basadas en la demanda real.</p>`
+                },
+                load_tracking: {
+                    energy_step: `<p>Probablemente utiliza un <strong>muestreo periódico</strong> de la utilización de la CPU, similar a 'ondemand'.</p><p>Su parámetro clave 'energy_step' o 'sampling_down_factor' modifica el intervalo de reevaluación cuando la CPU ya está a alta velocidad, retrasando la decisión de bajar la frecuencia.</p>`,
+                    schedutil: `<p>Utiliza <strong>Per-Entity Load Tracking (PELT)</strong>, un mecanismo avanzado del planificador.</p><p>Rastrea la carga de cada tarea de forma continua, proporcionando una métrica de utilización precisa e <strong>invariante a la frecuencia</strong>, lo que permite decisiones más inteligentes y rápidas.</p>`
+                },
+                ecosystem: {
+                    energy_step: `<p>Opera dentro de un ecosistema propietario y cerrado de Samsung. Su comportamiento está fuertemente influenciado y orquestado por una capa superior llamada <strong>AMIGO (Advanced Multi-IP Governor)</strong>.</p><p>AMIGO coordina CPU, GPU y memoria, por lo que \`energy_step\` no actúa de forma aislada.</p>`,
+                    schedutil: `<p>Está profundamente integrado con el <strong>planificador del kernel de Linux</strong>, una pieza central y genérica del sistema operativo.</p><p>Se beneficia del desarrollo abierto y las mejoras continuas de la comunidad de Linux. Se convirtió en el predeterminado para ARM en el kernel 5.9, lo que indica su madurez y robustez.</p>`
+                },
+                performance: {
+                    energy_step: `<p><strong>Fortaleza:</strong> Potencialmente mejor rendimiento en tareas largas y sostenidas (ej. juegos) al evitar caídas de frecuencia.</p><p><strong>Debilidad:</strong> Puede consumir más energía en cargas de trabajo mixtas o intermitentes. Informes de usuarios sugieren que otros gobernadores pueden ser más eficientes en batería.</p>`,
+                    schedutil: `<p><strong>Fortaleza:</strong> Excelente equilibrio. Ofrece un rendimiento cercano al gobernador 'performance' bajo carga, pero es mucho más eficiente en reposo o con cargas ligeras.</p><p><strong>Debilidad:</strong> En el kernel 5.4, su optimización para ARM aún estaba en desarrollo, alcanzando su máximo potencial en versiones posteriores.</p>`
+                }
+            }
+        };
+        
+        const chartTexts = {
+            en: {
+                behaviorLabel: 'CPU Frequency (%)',
+                behaviorTitle: (scenario) => `Response to Load: ${scenario.charAt(0).toUpperCase() + scenario.slice(1)}`,
+                behaviorYAxis: 'Relative Frequency (%)',
+                radarLabels: ['Sustained Performance', 'Energy Efficiency', 'Responsiveness', 'Adaptability (Generic)', 'Tuning Complexity'],
+            },
+            es: {
+                behaviorLabel: 'Frecuencia de CPU (%)',
+                behaviorTitle: (scenario) => `Respuesta a Carga: ${scenario.charAt(0).toUpperCase() + scenario.slice(1)}`,
+                behaviorYAxis: 'Frecuencia Relativa (%)',
+                radarLabels: ['Rendimiento Sostenido', 'Eficiencia Energética', 'Capacidad de Respuesta', 'Adaptabilidad (Genérico)', 'Complejidad de Ajuste'],
+            }
+        };
+
+        // --- GLOBAL STATE ---
+        let currentLang = 'en';
         let behaviorChart;
         let radarChart;
 
-        function handleBehaviorChartClick(scenario) {
-            try {
-                if (typeof updateBehaviorChart === 'function') {
-                    updateBehaviorChart(scenario);
-                } else {
-                    console.error("Error: La función 'updateBehaviorChart' no está definida.");
+        // --- LANGUAGE SWITCHER LOGIC ---
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+
+            // Update all elements with data-lang-key
+            document.querySelectorAll('[data-lang-key]').forEach(el => {
+                const key = el.dataset.langKey;
+                if (translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
                 }
-            } catch (e) {
-                console.error("Error al llamar a 'updateBehaviorChart':", e);
-            }
+            });
+
+            // Update language switcher button
+            const langEmoji = document.getElementById('lang-emoji');
+            langEmoji.textContent = (lang === 'en') ? '🇪🇸' : '🇬🇧';
+            
+            // Update dynamic content
+            updateComparisonContent(document.querySelector('.tab-button.active').dataset.tab);
+            destroyCharts();
+            createCharts();
         }
 
+        function toggleLanguage() {
+            const newLang = currentLang === 'en' ? 'es' : 'en';
+            setLanguage(newLang);
+        }
+
+        // --- DYNAMIC CONTENT UPDATE LOGIC ---
         function updateComparisonContent(tab) {
-            document.getElementById('energy_step-content').innerHTML = comparisonContent[tab].energy_step;
-            document.getElementById('schedutil-content').innerHTML = comparisonContent[tab].schedutil;
+            const content = comparisonContentByLang[currentLang];
+            document.getElementById('energy_step-content').innerHTML = content[tab].energy_step;
+            document.getElementById('schedutil-content').innerHTML = content[tab].schedutil;
         }
-
+        
         function setupTabListeners() {
             const tabs = document.querySelectorAll('.tab-button');
             tabs.forEach(tab => {
                 tab.addEventListener('click', () => {
                     tabs.forEach(t => t.classList.remove('active'));
                     tab.classList.add('active');
-                    const tabName = tab.dataset.tab;
-                    updateComparisonContent(tabName);
+                    updateComparisonContent(tab.dataset.tab);
                 });
             });
         }
-        
+
+        // --- CHART LOGIC ---
         const behaviorData = {
             idle: [15, 10],
             burst: [90, 85],
             sustained: [95, 75]
         };
         
-        function updateBehaviorChart(scenario) {
+        function handleBehaviorChartClick(scenario) {
             if (behaviorChart) {
                 behaviorChart.data.datasets[0].data = behaviorData[scenario];
-                if (behaviorChart.options.plugins && behaviorChart.options.plugins.title) {
-                    behaviorChart.options.plugins.title.text = `Respuesta a Carga: ${scenario.charAt(0).toUpperCase() + scenario.slice(1)}`;
-                }
+                behaviorChart.options.plugins.title.text = chartTexts[currentLang].behaviorTitle(scenario);
                 behaviorChart.update();
             }
+        }
+
+        function destroyCharts() {
+            if (behaviorChart) behaviorChart.destroy();
+            if (radarChart) radarChart.destroy();
+        }
+
+        function createCharts() {
+            createBehaviorChart();
+            createRadarChart();
         }
 
         function createBehaviorChart() {
@@ -270,34 +391,26 @@
                 data: {
                     labels: ['energy_step', 'schedutil'],
                     datasets: [{
-                        label: 'Frecuencia de CPU (%)',
+                        label: chartTexts[currentLang].behaviorLabel,
                         data: behaviorData.idle,
-                        backgroundColor: [
-                            'rgba(2, 132, 199, 0.6)', // sky-600
-                            'rgba(234, 179, 8, 0.6)' // yellow-500
-                        ],
-                        borderColor: [
-                            'rgba(2, 132, 199, 1)',
-                            'rgba(234, 179, 8, 1)'
-                        ],
+                        backgroundColor: ['rgba(2, 132, 199, 0.6)', 'rgba(234, 179, 8, 0.6)'],
+                        borderColor: ['rgba(2, 132, 199, 1)', 'rgba(234, 179, 8, 1)'],
                         borderWidth: 1
                     }]
                 },
                 options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
+                    responsive: true, maintainAspectRatio: false,
                     scales: {
                         y: {
-                            beginAtZero: true,
-                            max: 100,
-                            title: { display: true, text: 'Frecuencia Relativa (%)' }
+                            beginAtZero: true, max: 100,
+                            title: { display: true, text: chartTexts[currentLang].behaviorYAxis }
                         }
                     },
                     plugins: {
                         legend: { display: false },
                         title: {
                             display: true,
-                            text: 'Respuesta a Carga: Ligera',
+                            text: chartTexts[currentLang].behaviorTitle('idle'),
                             font: { size: 16 }
                         }
                     }
@@ -310,7 +423,7 @@
             radarChart = new Chart(ctx, {
                 type: 'radar',
                 data: {
-                    labels: ['Rendimiento Sostenido', 'Eficiencia Energética', 'Capacidad de Respuesta', 'Adaptabilidad (Genérico)', 'Complejidad de Ajuste'],
+                    labels: chartTexts[currentLang].radarLabels,
                     datasets: [{
                         label: 'energy_step',
                         data: [9, 4, 7, 3, 8],
@@ -319,8 +432,6 @@
                         borderColor: 'rgb(2, 132, 199)',
                         pointBackgroundColor: 'rgb(2, 132, 199)',
                         pointBorderColor: '#fff',
-                        pointHoverBackgroundColor: '#fff',
-                        pointHoverBorderColor: 'rgb(2, 132, 199)'
                     }, {
                         label: 'schedutil',
                         data: [7, 8, 9, 9, 3],
@@ -329,51 +440,34 @@
                         borderColor: 'rgb(234, 179, 8)',
                         pointBackgroundColor: 'rgb(234, 179, 8)',
                         pointBorderColor: '#fff',
-                        pointHoverBackgroundColor: '#fff',
-                        pointHoverBorderColor: 'rgb(234, 179, 8)'
                     }]
                 },
                 options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    elements: {
-                        line: {
-                            borderWidth: 3
-                        }
-                    },
+                    responsive: true, maintainAspectRatio: false,
+                    elements: { line: { borderWidth: 3 } },
                     scales: {
                         r: {
                             angleLines: { display: true },
-                            suggestedMin: 0,
-                            suggestedMax: 10,
+                            suggestedMin: 0, suggestedMax: 10,
                             pointLabels: { font: { size: 12 } },
-                            ticks: {
-                                stepSize: 2
-                            }
+                            ticks: { stepSize: 2 }
                         }
                     },
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                        },
-                         title: {
-                            display: false,
-                        }
-                    }
+                    plugins: { legend: { position: 'top' }, title: { display: false } }
                 }
             });
         }
 
+        // --- INITIALIZATION ---
         window.onload = function() {
-            console.log("Window loaded, initializing app..."); 
+            console.log("Window loaded, initializing app...");
             try {
+                document.getElementById('lang-toggle-btn').addEventListener('click', toggleLanguage);
                 setupTabListeners();
-                updateComparisonContent('philosophy'); 
-                createBehaviorChart();
-                createRadarChart();
-                console.log("App initialized successfully.");
+                setLanguage('en'); // Set initial language to English
+                console.log("App initialized successfully in English.");
             } catch (e) {
-                console.error("Error durante la inicialización de la aplicación:", e);
+                console.error("Error during application initialization:", e);
             }
         };
     </script>
